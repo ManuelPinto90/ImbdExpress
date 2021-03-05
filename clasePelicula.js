@@ -26,7 +26,7 @@ app.get('/pelicula',
         }    
     })
 
-app.post('/claseProfessionals', function(request,response)
+app.post('/pelicula', function(request,response)
     {
         if (pelicula == null)
         {
@@ -45,7 +45,7 @@ app.post('/claseProfessionals', function(request,response)
         response.send(respuesta);             
     })
 
-app.put('/claseProfessionals', function(request, response)
+app.put('/pelicula', function(request, response)
     {
         if(pelicula != null)
         {
@@ -80,19 +80,19 @@ app.put('/claseProfessionals', function(request, response)
         response.send(respuesta)
         }         
     });
-app.delete('/claseProfessionals', function(request, response)
+app.delete('/pelicula', function(request, response)
     {
         let respuesta;
-        if(profesional != null)
+        if(pelicula != null)
         {
-            profesional = null;
+            pelicula = null;
             respuesta = {error:false, codigo:200,
-                mensaje:'Profesional eliminado', resultado: profesional}
+                mensaje:'Pelicula eliminada', resultado: pelicula}
         }
         else
         {
             respuesta = {error:true, codigo:200,
-            mensaje:'El profesional no existe', resultado: profesional}
+            mensaje:'La pelicula no existe', resultado: pelicula}
         }        
         response.send(respuesta)        
     })
