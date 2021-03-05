@@ -190,7 +190,7 @@ app.delete('/claseProfessionals', function(request, response)
     }        
     response.send(respuesta)        
 })
-app.listen(3000)
+
 var actor1 = new Professional("Juan", 45, "Male", 80 , 185, "Brown", "Black", "Black", false, "Nigerian", 0 , "Actor" )
 var actor2 = new Professional("Felipe", 36, "Male", 65, 170, "Black", "Green", "Caucasic", false, "Spanish", 0, "Actor" )
 var director = new Professional("Sara", 36, "Female", 50, 168, "Blond", "Blue", "Caucasic", false, "French",0 , "Director")
@@ -227,14 +227,14 @@ app.get('/profesionales',
         var oscarNumber= request.body.oscarNumber;
         var profession= request.body.profession;
 
-        var newProfesional = new Professional (name, age, genre, weight, height, hairColor, eyeColor, race, isRetired, nationality, oscarNumber, profession)
+        newProfesional = new Professional(name, age, genre, weight, height, hairColor, eyeColor, race, isRetired, nationality, oscarNumber, profession)
         profesionales.push(newProfesional)
-        response.send(profesionales)             
+        response.send(newProfesional)             
     })
-app.put('/claseProfessionals', function(request, response)
+app.put('/profesionales', function(request, response)
 {   
-    
-    if(profesionales[id] != null)
+    var respuesta;
+    if(profesionales[request.body.id] != null)
     {       
             id = request.body.id
             if(request.body.name != null)
@@ -286,7 +286,7 @@ app.put('/claseProfessionals', function(request, response)
                 profesionales[id].profession= request.body.profession;
             }
             respuesta ={error:false, codigo:200,
-                        mensaje:'Profesional actualizado', resultado: profesional}
+                        mensaje:'Profesional actualizado', resultado: profesionales[request.body.id]}
             
             response.send(respuesta)
    
@@ -294,13 +294,13 @@ app.put('/claseProfessionals', function(request, response)
     else
     {
         respuesta ={error:true, codigo:200,
-        mensaje:'No hay profesional', resultado: profesional
+        mensaje:'No hay profesional', resultado: profesionales[request.body.id]
     }
 
     response.send(respuesta)
     }         
 });
-app.delete('/claseProfessionals', function(request, response)
+app.delete('/profesionales', function(request, response)
 {
     let respuesta;
     if(profesionales != null)
@@ -316,3 +316,4 @@ app.delete('/claseProfessionals', function(request, response)
     }        
     response.send(respuesta)        
 })
+app.listen(3000)
