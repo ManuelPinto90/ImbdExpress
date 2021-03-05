@@ -71,125 +71,127 @@ class Professional
 // var jorgeGuerricaechevarría = new Professional("Jorge Guerricaechevarría", 56, "Male", 75, 175, "Bald", "Green", "caucasian", false, "Spanish", 0, "Writer");
 
 // Creaciones y métodos
-var profesional = null
-app.get('/claseProfessionals', 
-    function(request,response)
-    {
-        if (profesional != null)
-            response.send(profesional);
-        else 
-        {
-            response.send({error:true, codigo:200,mensaje:"El profesional no existe"});
-        }    
-    })
-app.post('/claseProfessionals', function(request,response)
-{
-    if (profesional == null)
-    {
-        profesional = new Professional  (request.body.name,
-                            request.body.age,
-                            request.body.genre,
-                            request.body.weight,
-                            request.body.height,
-                            request.body.hairColor,
-                            request.body.eyeColor,
-                            request.body.race,
-                            request.body.isRetired,
-                            request.body.nationality,
-                            request.body.oscarNumber,
-                            prequest.body.profession)
-        respuesta = {error:false, codigo:200,
-                    mensaje:'Usuario creado', resultado: profesional};                    
-    }   
-    else{      
-        respuesta = {error:true, codigo:200,
-                    mensaje: 'Profesional existente', resultado: null}
-    }
-    response.send(respuesta);             
-})
-app.put('/claseProfessionals', function(request, response)
-{
-    if(profesional != null)
-    {
-            if(request.body.name != null)
-            {
-                profesional.name = request.body.name;
-            } 
-            if(request.body.age != null)
-            {    
-                profesional.age = request.body.age;
-            }
-            if(request.body.genre != null)
-            {    
-                profesional.genre= request.body.genre;
-            }
-            if(request.body.weight != null)
-            {
-                profesional.weight= request.body.weight;
-            }
-            if(request.body.height != null)
-            {
-                profesional.height= request.body.height;
-            }
-            if(request.body.hairColor != null)
-            {
-                profesional.hairColor= request.body.hairColor;
-            }
-            if(request.body.eyeColor != null)
-            {
-                profesional.eyeColor= request.body.hairColor;
-            }
-            if(request.body.race != null)
-            {
-                profesional.race= request.body.race;
-            }
-            if(request.body.isRetired != null)
-            {
-                profesional.isRetired= request.body.isRetired;
-            }
-            if(request.body.nationality != null)
-            {
-                profesional.nationality= request.body.nacionality;
-            }
-            if(request.body.oscarNumber != null)
-            {
-                profesional.oscarNumber= request.body.oscarNumber;
-            }
-            if(request.body.profession != null)
-            {
-                profesional.profession= request.body.profession;
-            }
-            respuesta ={error:false, codigo:200,
-                        mensaje:'Profesional actualizado', resultado: profesional}
+// var profesional;
+// app.get('/claseProfessionals', 
+//     function(request,response)
+//     {
+//         if (profesional != null)
+//         {
+//             response.send(profesional);
+//         }
+//         else 
+//         {
+//             response.send({error:true, codigo:200,mensaje:"El profesional no existe"});
+//         }    
+//     })
+// app.post('/claseProfessionals', function(request,response)
+// {
+//     if (profesional == null)
+//     {
+//         profesional = new Professional  (request.body.name,
+//                             request.body.age,
+//                             request.body.genre,
+//                             request.body.weight,
+//                             request.body.height,
+//                             request.body.hairColor,
+//                             request.body.eyeColor,
+//                             request.body.race,
+//                             request.body.isRetired,
+//                             request.body.nationality,
+//                             request.body.oscarNumber,
+//                             prequest.body.profession)
+//         respuesta = {error:false, codigo:200,
+//                     mensaje:'Usuario creado', resultado: profesional};                    
+//     }   
+//     else
+//     {      
+//         respuesta = {error:true, codigo:200,
+//                     mensaje: 'Profesional existente', resultado: null}
+//     }
+//     response.send(respuesta);             
+// })
+// app.put('/claseProfessionals', function(request, response)
+// {
+//     if(profesional != null)
+//     {
+//             if(request.body.name != null)
+//             {
+//                 profesional.name = request.body.name;
+//             } 
+//             if(request.body.age != null)
+//             {    
+//                 profesional.age = request.body.age;
+//             }
+//             if(request.body.genre != null)
+//             {    
+//                 profesional.genre= request.body.genre;
+//             }
+//             if(request.body.weight != null)
+//             {
+//                 profesional.weight= request.body.weight;
+//             }
+//             if(request.body.height != null)
+//             {
+//                 profesional.height= request.body.height;
+//             }
+//             if(request.body.hairColor != null)
+//             {
+//                 profesional.hairColor= request.body.hairColor;
+//             }
+//             if(request.body.eyeColor != null)
+//             {
+//                 profesional.eyeColor= request.body.hairColor;
+//             }
+//             if(request.body.race != null)
+//             {
+//                 profesional.race= request.body.race;
+//             }
+//             if(request.body.isRetired != null)
+//             {
+//                 profesional.isRetired= request.body.isRetired;
+//             }
+//             if(request.body.nationality != null)
+//             {
+//                 profesional.nationality= request.body.nacionality;
+//             }
+//             if(request.body.oscarNumber != null)
+//             {
+//                 profesional.oscarNumber= request.body.oscarNumber;
+//             }
+//             if(request.body.profession != null)
+//             {
+//                 profesional.profession= request.body.profession;
+//             }
+//             respuesta ={error:false, codigo:200,
+//                         mensaje:'Profesional actualizado', resultado: profesional}
             
-            response.send(respuesta)
+//             response.send(respuesta)
    
-    }
-    else
-    {
-        respuesta ={error:true, codigo:200,
-        mensaje:'No hay profesional', resultado: profesional
-    }
-
-    response.send(respuesta)
-    }         
-});
-app.delete('/claseProfessionals', function(request, response)
-{
-    let respuesta;
-    if(profesional != null)
-    {
-        profesional = null;
-        respuesta = {error:false, codigo:200,
-            mensaje:'Profesional eliminado', resultado: profesional}
-    }
-    else
-    {
-        respuesta = {error:true, codigo:200,
-        mensaje:'El profesional no existe', resultado: profesional}
-    }        
-    response.send(respuesta)        
-})
+//     }
+//     else
+//     {
+//         respuesta ={error:true, codigo:200,
+//         mensaje:'No hay profesional', resultado: profesional
+//     }
+//     response.send(respuesta)
+//     }         
+// });
+// app.delete('/claseProfessionals', function(request, response)
+// {
+//     let respuesta;
+//     if(profesional != null)
+//     {
+//         profesional = null;
+//         respuesta = {error:false, codigo:200,
+//             mensaje:'Profesional eliminado', resultado: profesional}
+//     }
+//     else
+//     {
+//         respuesta = {error:true, codigo:200,
+//         mensaje:'El profesional no existe', resultado: profesional}
+//     }        
+//     response.send(respuesta)        
+// })
 
 var actor1 = new Professional("Juan", 45, "Male", 80 , 185, "Brown", "Black", "Black", false, "Nigerian", 0 , "Actor" )
 var actor2 = new Professional("Felipe", 36, "Male", 65, 170, "Black", "Green", "Caucasic", false, "Spanish", 0, "Actor" )

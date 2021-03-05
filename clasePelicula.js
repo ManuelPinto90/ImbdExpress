@@ -1,10 +1,37 @@
 const express= require("express");
 const bodyParser = require("body-parser");
-const { Professional } = require("../../miniProyecto/IMDB/claseProfessional");
 const app = express()
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
-// Clase
+// Clases
+class Professional
+{       
+    constructor(name, age, genre, weight, height, hairColor, eyeColor, race, isRetired, nationality, oscarNumber, profession)
+        {
+        this.name = name;
+        this.age = age;
+        this.genre = genre;
+        this.weight = weight;
+        this.height = height;
+        this.hairColor = hairColor;
+        this.eyeColor = eyeColor;
+        this.race = race;
+        this.isRetired = isRetired;
+        this.nationality = nationality;
+        this.oscarNumber = oscarNumber;
+        this.profession = profession;
+        
+        }
+}
+
+var actor1 = new Professional("Juan", 45, "Male", 80 , 185, "Brown", "Black", "Black", false, "Nigerian", 0 , "Actor" )
+var actor2 = new Professional("Felipe", 36, "Male", 65, 170, "Black", "Green", "Caucasic", false, "Spanish", 0, "Actor" )
+var director = new Professional("Sara", 36, "Female", 50, 168, "Blond", "Blue", "Caucasic", false, "French",0 , "Director")
+var writer = new Professional("Ana", 28, "Female", 54, 164, "Black", "Brown", "Caucasic", false, "Spanish", 0 , "Writer")
+var actor3 = new Professional("Leonardo di Caprio", 48, "Male", 80, 1.82, "Blondy", "Blue", "Aria", false, "Yankee", 12, "Actor");
+var actor4 = new Professional("Mark Hammill", 69, "Male", 80, 172, "brown", "blue", "caucasian", false, "US citizen", 0, "Actor");
+var profesionales = [actor1,actor2, actor3, actor4, director, writer]
+
 class Movie
 {
     constructor(title, releaseYear, nationality, genre, actors, director, writer, language, platform, isMCU, mainCharacterName, producer, distributor)
@@ -25,7 +52,9 @@ class Movie
 
     }
 }
+var peli1= new Movie("Rec", 2008,"Spanish", "Terror",[actor1,actor2,actor3],director,writer,"Spanish","Netflix","No", actor4, "Global Media", "A3Media")
 
+// EJ2
 var pelicula = null
 app.get('/pelicula', 
     function(request,response)
@@ -108,5 +137,5 @@ app.delete('/pelicula', function(request, response)
         }        
         response.send(respuesta)        
     })
-    
+// EJ3
 app.listen(3000)
