@@ -86,18 +86,18 @@ app.post('/claseProfessionals', function(request,response)
 {
     if (profesional == null)
     {
-        profesional =       {name: request.body.name,
-                            age: request.body.age,
-                            genre: request.body.genre,
-                            weight: request.body.weight,
-                            height: request.body.height,
-                            hairColor: request.body.hairColor,
-                            eyeColor: request.body.eyeColor,
-                            race: request.body.race,
-                            isRetired: request.body.isRetired,
-                            nationality: request.body.nationality,
-                            oscarNumber: request.body.oscarNumber,
-                            profession: request.body.profession}
+        profesional = new Professional  (request.body.name,
+                            request.body.age,
+                            request.body.genre,
+                            request.body.weight,
+                            request.body.height,
+                            request.body.hairColor,
+                            request.body.eyeColor,
+                            request.body.race,
+                            request.body.isRetired,
+                            request.body.nationality,
+                            request.body.oscarNumber,
+                            prequest.body.profession)
         respuesta = {error:false, codigo:200,
                     mensaje:'Usuario creado', resultado: profesional};                    
     }   
@@ -212,7 +212,7 @@ app.get('/profesionales',
             response.send(profesionales)
         }        
     })
-    app.post('/profesionales', function(request,response)
+app.post('/profesionales', function(request,response)
     {
         var name= request.body.name;
         var age= request.body.age;

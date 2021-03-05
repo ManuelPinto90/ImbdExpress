@@ -30,11 +30,11 @@ app.post('/pelicula', function(request,response)
     {
         if (pelicula == null)
         {
-            pelicula =      {title: request.body.title,
-                              releaseYear: request.body.releaseYear,
-                              nationality: request.body.nationality,
-                              genre: request.body.genre
-                            }
+            pelicula = new Movie(request.body.title,
+                              request.body.releaseYear,
+                              request.body.nationality,
+                              request.body.genre)
+                            
             respuesta = {error:false, codigo:200,
                         mensaje:'Pelicula creada', resultado: pelicula};                    
         }   
