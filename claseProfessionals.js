@@ -234,7 +234,7 @@ app.post('/profesionales', function(request,response)
 app.put('/profesionales', function(request, response)
 {   
     var respuesta;
-    if(profesionales[request.body.id] != null)
+    if(profesionales[request.body.id])
     {       
             id = request.body.id
             if(request.body.name != null)
@@ -305,7 +305,7 @@ app.delete('/profesionales', function(request, response)
     let respuesta;
     if(profesionales != null)
     {
-        profesionales = null;
+        profesionales.splice(request.body.id);
         respuesta = {error:false, codigo:200,
             mensaje:'Profesional eliminado', resultado: profesional}
     }

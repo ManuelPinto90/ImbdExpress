@@ -1,19 +1,31 @@
 const express= require("express");
 const bodyParser = require("body-parser");
+const { Professional } = require("../../miniProyecto/IMDB/claseProfessional");
 const app = express()
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
 // Clase
 class Movie
 {
-    constructor(title, releaseYear, nationality, genre)
+    constructor(title, releaseYear, nationality, genre, actors, director, writer, language, platform, isMCU, mainCharacterName, producer, distributor)
     {
         this.title = title
         this.releaseYear = releaseYear
         this.nationality = nationality
         this.genre = genre
+        this.actors = actors
+        this.director = director
+        this.writer = writer
+        this.language = language
+        this.platform = platform
+        this.isMCU = isMCU
+        this.mainCharacterName = mainCharacterName
+        this.producer = producer
+        this.distributor = distributor
+
     }
 }
+
 var pelicula = null
 app.get('/pelicula', 
     function(request,response)
@@ -97,4 +109,4 @@ app.delete('/pelicula', function(request, response)
         response.send(respuesta)        
     })
     
-app.listen(3001)
+app.listen(3000)
