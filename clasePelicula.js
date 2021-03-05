@@ -36,7 +36,7 @@ app.post('/pelicula', function(request,response)
                               genre: request.body.genre
                             }
             respuesta = {error:false, codigo:200,
-                        mensaje:'Pelicula creada', resultado: profesional};                    
+                        mensaje:'Pelicula creada', resultado: pelicula};                    
         }   
         else{      
             respuesta = {error:true, codigo:200,
@@ -66,7 +66,7 @@ app.put('/pelicula', function(request, response)
                     pelicula.genre= request.body.genre;
                 }
                 respuesta ={error:false, codigo:200,
-                            mensaje:'Profesional actualizado', resultado: profesional}
+                            mensaje:'Profesional actualizado', resultado: pelicula}
                 
                 response.send(respuesta)
        
@@ -74,7 +74,7 @@ app.put('/pelicula', function(request, response)
         else
         {
             respuesta ={error:true, codigo:200,
-            mensaje:'No hay profesional', resultado: profesional
+            mensaje:'No hay profesional', resultado: pelicula
         }
     
         response.send(respuesta)
