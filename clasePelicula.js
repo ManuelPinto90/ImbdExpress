@@ -1,8 +1,8 @@
 const express= require("express");
-const bodyParser = require("body-parser");
+
 const app = express()
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json());
+app.use(express.urlencoded({extended:false}))
+app.use(express.json());
 // Clases
 class Professional
 {       
@@ -26,12 +26,13 @@ class Professional
 
 var actor1 = new Professional("Juan", 45, "Male", 80 , 185, "Brown", "Black", "Black", false, "Nigerian", 0 , "Actor" )
 var actor2 = new Professional("Felipe", 36, "Male", 65, 170, "Black", "Green", "Caucasic", false, "Spanish", 0, "Actor" )
-var director = new Professional("Sara", 36, "Female", 50, 168, "Blond", "Blue", "Caucasic", false, "French",0 , "Director")
-var writer = new Professional("Ana", 28, "Female", 54, 164, "Black", "Brown", "Caucasic", false, "Spanish", 0 , "Writer")
 var actor3 = new Professional("Leonardo di Caprio", 48, "Male", 80, 1.82, "Blondy", "Blue", "Aria", false, "Yankee", 12, "Actor");
 var actor4 = new Professional("Mark Hammill", 69, "Male", 80, 172, "brown", "blue", "caucasian", false, "US citizen", 0, "Actor");
-var profesionales = [actor1,actor2, actor3, actor4, director, writer]
+var director = new Professional("Sara", 36, "Female", 50, 168, "Blond", "Blue", "Caucasic", false, "French",0 , "Director")
+var writer = new Professional("Ana", 28, "Female", 54, 164, "Black", "Brown", "Caucasic", false, "Spanish", 0 , "Writer")
 
+var profesionales = [actor1,actor2, actor3, actor4, director, writer]
+var actors =[actor1,actor2,actor3,actor4]
 class Movie
 {
     constructor(title, releaseYear, nationality, genre, actors, director, writer, language, platform, isMCU, mainCharacterName, producer, distributor)
@@ -52,15 +53,17 @@ class Movie
 
     }
 }
-var peli1= new Movie("Rec", 2008,"Spanish", "Terror",[actor1,actor2,actor3],director,writer,"Spanish","Netflix","No", actor4, "Global Media", "A3Media")
+var peli1= new Movie("Rec", 2008,"Spanish", "Terror",[actor1,actor2,actor3],director,writer,
+                    "Spanish","Netflix","No", actor4, "Global Media", "A3Media")
 
 // EJ2
 var pelicula = null
 app.get('/pelicula', 
     function(request,response)
     {
-        if (pelicula != null)
-            response.send(pelicula);
+        let respuesta
+        if (peli1 != null)
+            response.send(peli1);
         else 
         {
             response.send({error:true, codigo:200,mensaje:"La pelicula no existe"});
@@ -69,13 +72,26 @@ app.get('/pelicula',
 
 app.post('/pelicula', function(request,response)
     {
-        if (pelicula == null)
+        peli1 = null;
+        let respuesta;
+        if (peli1 == null)
         {
-            pelicula = new Movie(request.body.title,
-                              request.body.releaseYear,
-                              request.body.nationality,
-                              request.body.genre)
-                            
+            var title = request.body.title;
+            var releaseYear = request.body.releaseYear;
+            var nationality = request.body.nationality;
+            var genre = request.body.genre;
+            var actors = request.body.actors;
+            var director = request.body.director;
+            var writer = request.body.writer;
+            var language = request.body.language;
+            var platform = request.body.platform;
+            var isMCU = request.body.isMCU;
+            var mainCharacterName = request.body.mainCharacterName;
+            var producer = request.body.producer;ç
+            var distributor = request.body.distributor;
+            var peli1= new Movie(title, releaseYear, nationality, genre, actors, director, writer, language, platform, isMCU, mainCharacterName, producer, distributor)
+
+            response.send(peli1)                
             respuesta = {error:false, codigo:200,
                         mensaje:'Pelicula creada', resultado: pelicula};                    
         }   
@@ -88,6 +104,7 @@ app.post('/pelicula', function(request,response)
 
 app.put('/pelicula', function(request, response)
     {
+        let respuesta;
         if(pelicula != null)
         {
                 if(request.body.title != null)
@@ -106,10 +123,44 @@ app.put('/pelicula', function(request, response)
                 {
                     pelicula.genre= request.body.genre;
                 }
-                respuesta ={error:false, codigo:200,
-                            mensaje:'Profesional actualizado', resultado: pelicula}
-                
-                response.send(respuesta)
+                if(request.body.actors != null)
+                {
+                    peli1.actors = request.body.actors;
+                }
+                if(request.body.director != null)
+                {
+                    peli1.director = request.body.director;
+                }
+                if(request.body.writer != null)
+                {
+                    peli1.writer = request.body.writer;
+                }
+                if(request.body.language != null)
+                {
+                    peli1.language = request.body.language;
+                }
+                if(request.body.platform != null)
+                {
+                    peli1.platform = request.body.platform;
+                }
+                if(request.body.isMCU != null)
+                {
+                    peli1.isMCU = request.body.isMCU;
+                }
+                if(request.body.mainCharacterName != null)
+                {
+                    peli1.mainCharacterName = request.body.mainCharacterName;
+                }
+                if(request.body.producer != null)
+                {
+                    peli1.producer = request.body.producer;
+                }
+                if(request.body.distributor != null)
+                {
+                    peli1.distributor = request.body.distributor;
+                }                
+                response.send({error:false, codigo:200,
+                    mensaje:'Pelicula actualizada', resultado: pelicula})
        
         }
         else
@@ -124,9 +175,9 @@ app.put('/pelicula', function(request, response)
 app.delete('/pelicula', function(request, response)
     {
         let respuesta;
-        if(pelicula != null)
+        if(peli1 != null)
         {
-            pelicula = null;
+            peli1 = null;
             respuesta = {error:false, codigo:200,
                 mensaje:'Pelicula eliminada', resultado: pelicula}
         }
@@ -137,5 +188,4 @@ app.delete('/pelicula', function(request, response)
         }        
         response.send(respuesta)        
     })
-// EJ3
 app.listen(3000)
